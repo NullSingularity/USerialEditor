@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E0620047-C696-4D9C-9823-32B4C1E6A57E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>USerialEditor</RootNamespace>
+    <AssemblyName>USerialEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.8.0.0\lib\net462\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.FileExtensions.8.0.0\lib\net462\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Ini, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.Ini.8.0.0\lib\net462\Microsoft.Extensions.Configuration.Ini.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.FileProviders.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.FileProviders.Physical.8.0.0\lib\net462\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.FileSystemGlobbing.8.0.0\lib\net462\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExtendedTemplate.cs" />
+    <Compile Include="PropertyClasses\ArrayProperty.cs" />
+    <Compile Include="PropertyClasses\BoolProperty.cs" />
+    <Compile Include="PropertyClasses\ByteProperty.cs" />
+    <Compile Include="ByteString.cs" />
+    <Compile Include="ClassLibrary.cs" />
+    <Compile Include="ConfigManager.cs" />
+    <Compile Include="PropertyClasses\ClassReferenceProperty.cs" />
+    <Compile Include="PropertyClasses\EnumTemplate.cs" />
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSourceManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSourceManager.Designer.cs">
+      <DependentUpon>FormSourceManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainApplicationContext.cs" />
+    <Compile Include="PropertyClasses\ClassProperty.cs" />
+    <Compile Include="PropertyClasses\ClassTemplate.cs" />
+    <Compile Include="FormFileDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFileDisplay.Designer.cs">
+      <DependentUpon>FormFileDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectFileControls.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ObjectFileControls.Designer.cs">
+      <DependentUpon>ObjectFileControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyClasses\FloatProperty.cs" />
+    <Compile Include="PropertyClasses\IntProperty.cs" />
+    <Compile Include="PropertyClasses\NameProperty.cs" />
+    <Compile Include="PropertyClasses\ObjectReferenceProperty.cs" />
+    <Compile Include="PropertyClasses\PropertyGroup.cs" />
+    <Compile Include="PropertyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyControl.Designer.cs">
+      <DependentUpon>PropertyControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyControlArray.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyControlArray.Designer.cs">
+      <DependentUpon>PropertyControlArray.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyControlBoolean.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyControlBoolean.Designer.cs">
+      <DependentUpon>PropertyControlBoolean.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyControlByte.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyControlByte.Designer.cs">
+      <DependentUpon>PropertyControlByte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyControlEnum.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyControlEnum.Designer.cs">
+      <DependentUpon>PropertyControlEnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyControlFloat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyControlFloat.Designer.cs">
+      <DependentUpon>PropertyControlFloat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyControlInt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyControlInt.Designer.cs">
+      <DependentUpon>PropertyControlInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyControlString.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyControlString.Designer.cs">
+      <DependentUpon>PropertyControlString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyControlStruct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyControlStruct.Designer.cs">
+      <DependentUpon>PropertyControlStruct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyModifiedEventArgs.cs" />
+    <Compile Include="PropertyModifiedEventHandler.cs" />
+    <Compile Include="SerializedFileWriter.cs" />
+    <Compile Include="SourceCodeLibrary.cs" />
+    <Compile Include="SourceCodeProcessor.cs" />
+    <Compile Include="SourceLoader.cs" />
+    <Compile Include="SourceSegment.cs" />
+    <Compile Include="SourceSegmentOptional.cs" />
+    <Compile Include="SourceSegmentRequired.cs" />
+    <Compile Include="SourceStatementParser.cs" />
+    <Compile Include="SourceTemplateProcessor.cs" />
+    <Compile Include="PropertyClasses\StaticArrayProperty.cs" />
+    <Compile Include="TemplateRetrieval.cs" />
+    <Compile Include="TemplateStorage.cs" />
+    <Compile Include="PropertyFactory.cs" />
+    <Compile Include="PropertyClasses\StringProperty.cs" />
+    <Compile Include="PropertyClasses\StructProperty.cs" />
+    <Compile Include="PropertyClasses\StructTemplate.cs" />
+    <Compile Include="TemplateManager.cs" />
+    <Compile Include="PropertyClasses\PropertyTemplate.cs" />
+    <Compile Include="FormTermDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTermDisplay.Designer.cs">
+      <DependentUpon>FormTermDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyClasses\UndefinedProperty.cs" />
+    <Compile Include="PropertyClasses\UProperty.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormFileDisplay.resx">
+      <DependentUpon>FormFileDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSourceManager.resx">
+      <DependentUpon>FormSourceManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ObjectFileControls.resx">
+      <DependentUpon>ObjectFileControls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormTermDisplay.resx">
+      <DependentUpon>FormTermDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyControl.resx">
+      <DependentUpon>PropertyControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyControlArray.resx">
+      <DependentUpon>PropertyControlArray.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyControlBoolean.resx">
+      <DependentUpon>PropertyControlBoolean.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyControlByte.resx">
+      <DependentUpon>PropertyControlByte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyControlEnum.resx">
+      <DependentUpon>PropertyControlEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyControlFloat.resx">
+      <DependentUpon>PropertyControlFloat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyControlInt.resx">
+      <DependentUpon>PropertyControlInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyControlString.resx">
+      <DependentUpon>PropertyControlString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyControlStruct.resx">
+      <DependentUpon>PropertyControlStruct.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
