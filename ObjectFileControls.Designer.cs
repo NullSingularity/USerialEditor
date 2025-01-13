@@ -30,7 +30,7 @@
         {
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.propertyTreeView = new System.Windows.Forms.TreeView();
             this.panelName = new System.Windows.Forms.Panel();
             this.panelControl = new System.Windows.Forms.Panel();
             this.labelPropertyName = new System.Windows.Forms.Label();
@@ -60,7 +60,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.treeView1);
+            this.splitContainer1.Panel1.Controls.Add(this.propertyTreeView);
             // 
             // splitContainer1.Panel2
             // 
@@ -73,12 +73,12 @@
             // 
             // treeView1
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(155, 344);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.propertyTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyTreeView.Location = new System.Drawing.Point(0, 0);
+            this.propertyTreeView.Name = "treeView1";
+            this.propertyTreeView.Size = new System.Drawing.Size(155, 344);
+            this.propertyTreeView.TabIndex = 0;
+            this.propertyTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // panelName
             // 
@@ -150,7 +150,7 @@
         #endregion
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView propertyTreeView;
         private System.Windows.Forms.Panel panelControl;
         private System.Windows.Forms.Panel panelName;
         private System.Windows.Forms.Label labelPropertyName;

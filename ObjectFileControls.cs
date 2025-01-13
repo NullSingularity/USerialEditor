@@ -15,7 +15,8 @@ namespace USerialEditor
         ClassLibrary classLibrary;
         PropertyFactory propertyFactory;
         UProperty myObject;
-        Dictionary<TreeNode, UProperty> propertyNodes;
+        Dictionary<TreeNode, UProperty> propertiesByNode;
+        Dictionary<UProperty, TreeNode> nodesByProperty;
         Font nodeBaseFont, nodeModifiedFont, nodeInvalidFont;
         PropertyControl propertyControl;
         
@@ -25,28 +26,37 @@ namespace USerialEditor
             this.myObject = myObject;
             this.classLibrary = classLibrary;
             this.propertyFactory = propertyFactory;
-            propertyNodes = new Dictionary<TreeNode, UProperty>();
+            propertiesByNode = new Dictionary<TreeNode, UProperty>();
+            nodesByProperty = new Dictionary<UProperty, TreeNode>();
             nodeBaseFont = new Font("Arial", 8);
             nodeModifiedFont = new Font(nodeBaseFont, FontStyle.Bold);
             nodeInvalidFont = new Font(nodeBaseFont, FontStyle.Strikeout);
-            RefreshTree();
+            InitializeTree();
         }
 
-        private void RefreshTree()
+        private void InitializeTree()
         {
             if(myObject == null) 
             {
                 return;
             }
-            treeView1.Nodes.Clear();
-            propertyNodes.Clear();
-            TreeNode rootNode = treeView1.Nodes.Add(myObject.GetName());
+            propertyTreeView.Nodes.Clear();
+            propertiesByNode.Clear();
+            nodesByProperty.Clear();
+            TreeNode rootNode = propertyTreeView.Nodes.Add(myObject.GetName());
             BuildTreeWorker(rootNode, myObject);
         }
 
         private void BuildTreeWorker(TreeNode currentNode, UProperty currentProperty)
         {
-            propertyNodes.Add(currentNode, currentProperty);
+            if(!propertiesByNode.ContainsKey(currentNode))
+            {
+                propertiesByNode.Add(currentNode, currentProperty);
+            }
+            if(!nodesByProperty.ContainsKey(currentProperty))
+            {
+                nodesByProperty.Add(currentProperty, currentNode);
+            }
             int index = 0;
             foreach (UProperty subProperty in currentProperty.SubProperties)
             {
@@ -59,7 +69,7 @@ namespace USerialEditor
                 {
                     newName += "[" + index + "]";
                 }
-                TreeNode subNode = new TreeNode(newName);//currentNode.Nodes.Add(newName);
+                TreeNode subNode = new TreeNode(newName);
                 subNode.NodeFont = nodeModifiedFont;
                 currentNode.Nodes.Add(subNode);
                 index++;
@@ -70,24 +80,17 @@ namespace USerialEditor
 
         private void StylizeTree()
         {
-           /* foreach (TreeNode node in treeView1.Nodes)
-            {
-                StylizeTreeWorker(node);
-            }*/
-           foreach(TreeNode node in propertyNodes.Keys)
+           foreach(TreeNode node in propertiesByNode.Keys)
            {
                 StylizeNode(node);
            }
-            // treeView1.BeginUpdate();
-           // treeView1.Update();
-           // treeView1.EndUpdate();
         }
 
         private void StylizeTreeWorker(TreeNode node)
         {
-            foreach (TreeNode childNode in node.Nodes)
+            foreach (TreeNode subNode in node.Nodes)
             {
-                StylizeTreeWorker(childNode);
+                StylizeTreeWorker(subNode);
             }
             StylizeNode(node);
         }
@@ -98,12 +101,12 @@ namespace USerialEditor
             { 
                 return; 
             }
-            if (!propertyNodes.ContainsKey(node)) 
+            if (!propertiesByNode.ContainsKey(node)) 
             {
                 return;
             }
 
-            UProperty property = propertyNodes[node];
+            UProperty property = propertiesByNode[node];
             if (property is UndefinedProperty)
             {
                 node.ForeColor = Color.Red;
@@ -128,6 +131,70 @@ namespace USerialEditor
 
         }
 
+        private void RemoveNode(TreeNode node)
+        {
+            for (int i = 0; i < node.Nodes.Count; i++)
+            {
+                TreeNode subNode = node.Nodes[i];
+                if(subNode != null)
+                {
+                    RemoveNode(subNode);
+                    i--;
+                }
+            }
+            node.Remove();
+            RemoveNodeMapping(node);
+        }
+
+        private void RemoveNodeMapping(TreeNode node)
+        {
+            if(propertiesByNode.ContainsKey(node))
+            {
+                UProperty property = propertiesByNode[node];
+                propertiesByNode.Remove(node);
+                if(nodesByProperty.ContainsKey(property))
+                {
+                    nodesByProperty.Remove(property);
+                }
+            }
+
+        }
+
+        private void UpdateNode(UProperty property)
+        {
+            TreeNode baseNode = null;
+            nodesByProperty.TryGetValue(property, out baseNode);
+            if(baseNode == null)
+            {
+                return;
+            }
+            UProperty selectedProperty = null;
+            propertiesByNode.TryGetValue(propertyTreeView.SelectedNode, out selectedProperty);
+
+            propertyTreeView.BeginUpdate();
+            for (int i = 0; i < baseNode.Nodes.Count; i++)
+            {
+                TreeNode subNode = baseNode.Nodes[i];
+                if(subNode != null)
+                {
+                    RemoveNode(subNode);
+                    i--;
+                }
+            }
+
+            BuildTreeWorker(baseNode, property);
+            if (selectedProperty != null)
+            {
+                TreeNode selectedNode = null;
+                nodesByProperty.TryGetValue(selectedProperty, out selectedNode);
+                if (selectedNode != null)
+                {
+                    propertyTreeView.SelectedNode = selectedNode;
+                }
+            }
+            propertyTreeView.EndUpdate();
+        }
+
         private void propertyControl_PropertyModified(object sender, EventArgs e)
         {
             if (e is PropertyModifiedEventArgs)
@@ -135,7 +202,7 @@ namespace USerialEditor
                 Console.WriteLine("PROPERTY MODIFIED: " + ((PropertyModifiedEventArgs)e).Property.ToString());
                 if(((PropertyModifiedEventArgs)e).Property is ArrayProperty)
                 {
-                    RefreshTree();
+                    UpdateNode(((PropertyModifiedEventArgs)e).Property);
                 }
             }
             StylizeTree();
@@ -143,7 +210,7 @@ namespace USerialEditor
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            UProperty property = propertyNodes[e.Node];
+            UProperty property = propertiesByNode[e.Node];
             if(property == null)
             {
                 Console.WriteLine("Null selection");
